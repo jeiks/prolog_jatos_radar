@@ -1,5 +1,5 @@
 % Controle dos jatos
-:- module(controle_jatos, [vez/5]).
+:- module(jatos_controle, [vez/5]).
 
 % deve existir um arquivo com o nome "jato0.pl" ou "jato0.pro" com o predicado obter_controles/2
 :- use_module(jato0, [obter_controles/4 as obter_controles0]).
