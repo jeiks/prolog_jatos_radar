@@ -247,6 +247,7 @@ class Jet {
 
         // SCORE
         this.#drawScore(ctx, x, y);
+        //this.#drawName(ctx, x, y);
     }
 
     // desenha o Score
@@ -268,7 +269,39 @@ class Jet {
         ctx.font = "bold 11px Arial";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText(String(Math.max(0, Math.round(this.score))), 0, scoreY);
+        const scoreText = String(Math.max(0, Math.round(this.score)));
+        ctx.fillText(scoreText, 0, scoreY);
+        if (this.score <= 20) {
+            ctx.strokeStyle = "white";
+            ctx.lineWidth = 0.2;
+            ctx.strokeText(scoreText, 0, scoreY);
+        }
+        ctx.restore();
+    }
+
+    // desenha o Score
+    #drawName(ctx, x, y) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.font = "bold 11px Arial";
+        const scoreY = this.height * 0.90;
+        const boxWidth = ctx.measureText(this.name).width+5;
+        const boxHeight = 17;
+        const radius = 5;
+        ctx.fillStyle = "rgba(0,0,0,0.58)";
+        ctx.beginPath();
+        ctx.roundRect(-boxWidth / 2, scoreY - boxHeight / 2, boxWidth, boxHeight, radius);
+        ctx.fill();
+        ctx.strokeStyle = this.color;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        ctx.fillStyle = this.color;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(this.name, 0, scoreY);
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 0.2;
+        ctx.strokeText(this.name, 0, scoreY);
         ctx.restore();
     }
 }
